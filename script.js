@@ -1,6 +1,22 @@
 let input = document.querySelector("#input");
 let addbtn = document.querySelector("#add-btn");
 let unlist = document.querySelector("#ultodo-list");
+let taskCounter=document.querySelector("#para")
+     
+const taskcounting=()=>{
+                       let count=0;
+let todoitems = document.querySelectorAll("li");
+
+             for (let element of todoitems) {
+             let taskcheckbox=element.querySelector("input")
+
+             if(!taskcheckbox.checked){
+              count++
+             }
+            }
+                          taskCounter.innerText=`Tasks Remaining: ${count}`
+          }
+
 
 addbtn.addEventListener("click", () => {
   if (input.value == "") {
@@ -10,7 +26,6 @@ addbtn.addEventListener("click", () => {
     let inputspan=document.createElement("span")
    const  dltbtn = document.createElement("button")
    const checkbox=document.createElement("input")
-
       let editabletask;
 
 
@@ -26,6 +41,9 @@ addbtn.addEventListener("click", () => {
     editbtn.addEventListener("click",()=>{
 
       if(editbtn.innerText=="Edit"){
+
+
+
             editabletask=document.createElement("input")
 
          editbtn.innerText="save"
@@ -46,22 +64,36 @@ addbtn.addEventListener("click", () => {
     })
 
      checkbox.addEventListener("click",()=>{
-          
            if(checkbox.checked){
-            console.log("true")
+
+     
             inputspan.style.color="grey"
             inputspan.style.textDecoration="line-through"
+
+          
+  
            }else{
                         inputspan.style.color="black"
 
             inputspan.style.textDecoration="none"
            }
+       
+           taskcounting();
+
      })
 
 dltbtn.addEventListener("click",()=>{
 addnewli.remove()
+           taskcounting();
+
+
 })
     unlist.append(addnewli);
-    input.value=""
+           taskcounting();
+
+     input.value=""
   }
 });
+
+
+ 
